@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Akan Name Finder</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Find Your Akan Name</h2>
+        <p>Enter your birth date to find your Akan name based on the day of the week you were born.</p>
+        <input type="date" id="birthdate" required>
+        <button onclick="findAkanName()">Find My Akan Name</button>
+        <p id="akan-name"></p>
+    </div>
+
+    <script>
+        function findAkanName() {
+            const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+            const akanNames = {
+                "Sunday": { male: "Kwasi", female: "Akosua" },
+                "Monday": { male: "Kwadwo", female: "Adwoa" },
+                "Tuesday": { male: "Kwabena", female: "Abena" },
+                "Wednesday": { male: "Kwaku", female: "Akua" },
+                "Thursday": { male: "Yaw", female: "Yaa" },
+                "Friday": { male: "Kofi", female: "Afia" },
+                "Saturday": { male: "Kwame", female: "Ama" }
+            };
+
+            const birthdate = new Date(document.getElementById('birthdate').value);
+            if (isNaN(birthdate)) {
+                alert("Please select a valid date.");
+                return;
+            }
+
+            const dayOfWeek = birthdate.getDay();
+            const gender = prompt("Enter your gender (male/female):").toLowerCase();
+
+            if (gender !== "male" && gender !== "female") {
+                alert("Invalid gender entered. Please enter 'male' or 'female'.");
+                return;
+            }
+
+            const dayName = dayNames[dayOfWeek];
+            const akanName = akanNames[dayName][gender];
+
+            document.getElementById('akan-name').textContent = `Your Akan name is: ${akanName}`;
+        }
+    </script>
+</body>
+</html>
